@@ -1,10 +1,11 @@
 import sqlite3
+from definition import PROJECT_ROOT
 
 
 class Database:
 
     def __init__(self):
-        self.connection = sqlite3.connect('/home/oleksii/PycharmProjects/Project-task/become_qa_auto.db')
+        self.connection = sqlite3.connect(PROJECT_ROOT / 'become_qa_auto.db')
         self.cursor = self.connection.cursor()
 
     def test_connection(self):
@@ -21,7 +22,7 @@ class Database:
         return record
 
     def get_user_address_by_name(self, name):
-        query = f"SELECT address, city, postalCode FROM customers WHERE name = '{name}'"
+        query = f"SELECT address, city, postalCode, country FROM customers WHERE name = '{name}'"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
 
@@ -45,7 +46,7 @@ class Database:
         self.cursor.execute(query)
         self.connection.commit()
 
-    def delete_product_by_id(self, product_id):
+    def delete_product_by_id(self, product_id: int):
         query = f"DELETE FROM products WHERE id = '{product_id}'"
         self.cursor.execute(query)
         self.connection.commit()
@@ -53,8 +54,8 @@ class Database:
     def get_detailed_orders(self):
         query = "SELECT orders.id, customers.name, products.name, products.description, orders.order_date" \
                 " FROM orders" \
-                " JOIN customers ON orders.customer_id = customer.id" \
-                " JOIN products ON orders.product.id = products.id"
+                " JOIN customers ON orders.customer_id = customers.id" \
+                " JOIN products ON orders.product_id = products.id"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
 
