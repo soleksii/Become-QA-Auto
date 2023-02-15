@@ -3,7 +3,6 @@ from modules.api.clients.github import GitHub
 
 
 class User:
-
     def __init__(self) -> None:
         self.name = None
         self.second_name = None

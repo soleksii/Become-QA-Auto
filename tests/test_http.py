@@ -13,6 +13,7 @@ def test_second_request():
     r = requests.get('https://api.github.com/users/defunkt')
     body = r.json()
 
+    # Check response fields
     assert body['name'] == 'Chris Wanstrath'
     assert r.status_code == 200
     assert r.headers['Server'] == 'GitHub.com'
@@ -22,4 +23,5 @@ def test_second_request():
 def test_status_code_request():
     r = requests.get('https://api.github.com/users/sergii_butenko')
 
+    # Check response status code is equal to 404
     assert r.status_code == 404

@@ -20,6 +20,7 @@ def test_check_user_sergii():
     database = Database()
     address = database.get_user_address_by_name('Sergii')
 
+    # Check each user data fields
     assert address[0][0] == 'Maydan Nezalezhnosti 1'
     assert address[0][1] == 'Kyiv'
     assert address[0][2] == '3127'
@@ -32,6 +33,7 @@ def test_product_qnt_update():
     database.update_product_qnt_by_id(1, 25)
     qnt = database.select_product_qnt_by_id(1)
 
+    # Check product quantity after update
     assert qnt[0][0] == 25
 
 
@@ -43,6 +45,7 @@ def test_product_insert():
     database.insert_product(account_id, 'печиво', 'солодке', 30)
     qnt = database.select_product_qnt_by_id(account_id)
 
+    # Check product quantity by selected id
     assert qnt[0][0] == 30
 
 
@@ -53,6 +56,7 @@ def test_product_delete():
     database.delete_product_by_id(99)
     product = database.select_product_qnt_by_id(99)
 
+    # Check product is deleted from the database
     assert not product
 
 
@@ -62,8 +66,10 @@ def test_detailed_orders():
     orders = database.get_detailed_orders()
     print("Замовлення", orders)
 
+    # Check quantity of orders equal to one
     assert len(orders) == 1
 
+    # Check each order data fields
     assert orders[0][0] == 1
     assert orders[0][1] == 'Sergii'
     assert orders[0][2] == 'солодка вода'

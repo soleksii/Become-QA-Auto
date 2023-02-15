@@ -4,17 +4,17 @@ from modules.ui.page_objects.sign_in_page import SignInPage
 
 @pytest.mark.ui
 def test_wrong_login():
-    # Створення об'єкту сторінки
+    # Create page object
     signInPage = SignInPage()
 
-    # Відкриваємо сторінку Github
+    # Open the "Github" page
     signInPage.go_to()
 
-    # Виконуємо спробу увійти в систему Github
+    # Trying to login to the Github
     signInPage.try_login('tester', 'password')
 
-    # Перевіряємо що назва сторінки така, яку ми очікуємо
+    # Check if the page name is expected
     assert signInPage.check_title("Sign in to GitHub · GitHub")
 
-    # Закриваємо браузер
+    # Close the browser
     signInPage.close()
